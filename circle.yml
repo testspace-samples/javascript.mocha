@@ -1,0 +1,12 @@
+machine:
+  node:
+    version: 4.0
+    
+test:
+  override:
+    - npm install
+    - make lint test
+ 
+  post:
+    - curl -s https://testspace-client.s3.amazonaws.com/testspace-linux.tgz | sudo tar -zxvf- -C /usr/local/bin
+    - testspace checkstyle.xml [Tests]xunit.xml{test} coverage/cobertura-coverage.xml $TESTSPACE_TOKEN/${CIRCLE_BRANCH}#circle.Build.${CIRCLE_BUILD_NUM}

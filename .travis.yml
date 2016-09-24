@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - "4.0"
+  
+before_script:
+  - npm install
+  
+script: 
+  - make lint test 
+  
+after_script:
+  - curl -s https://testspace-client.s3.amazonaws.com/testspace-linux.tgz | sudo tar -zxvf- -C /usr/local/bin
+  - testspace checkstyle.xml [Tests]xunit.xml{test} coverage/cobertura-coverage.xml $TESTSPACE_TOKEN/${TRAVIS_BRANCH}#travis.Build.${TRAVIS_BUILD_NUMBER}

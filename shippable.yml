@@ -1,0 +1,16 @@
+language: node_js
+
+node_js:
+  - "4.0"
+
+env:
+  global:
+   - secure: a9cYRKZdEIwS+F1qiz5RvUAOv/sC4tUtv4gtvkiMlPhAvLpDwN/HY4TvCgvJoFRTEy/tbqJWrT58kxzKiojo5N3Fz9L30V7IWzlT2v9NTBcUp7EJ+3nz3cReH4UNCKZCHJJ+tOLQqermycrDIiQWmLB5YycTvHtZf31QxNGPtg9xGG3UL7F/X+5FrvcDi8zuHQZA5Ndjn4TDiN7RDXcZmKmu8KKbZMaA6tSe3C1i3QBvMoXS5R8nsBTfjkHPOkoYwdV87+5WVghnKSc5wkgFSgzsBMEdWNkyE7O/mN07AM/bNLQZdGh9NEozfT6LYTiLXrV55T6nsHdr92ioLLVcmA==
+  
+script:
+  - npm install
+  - make lint test
+
+after_script:
+  - curl -s https://testspace-client.s3.amazonaws.com/testspace-linux.tgz | sudo tar -zxvf- -C /usr/local/bin
+  - testspace checkstyle.xml [Tests]xunit.xml{test} coverage/cobertura-coverage.xml $TESTSPACE_TOKEN/${BRANCH}#ship.Build.${BUILD_NUMBER}

@@ -1,60 +1,40 @@
-nodejs-tdd-boilerplate
-======================
+[![Testspace](http://www.testspace.com/public/img/testspace_logo.png)](http://www.testspace.com)
+***
 
-# NodeJS TDD Boilerplate
+## JavaScript/Mocha sample for demonstrating Testspace based on the [nodejs-tdd-boilerplate](https://github.com/BryanDonovan/nodejs-tdd-boilerplate)
 
-A basic boilerplate for NodeJS REST API applications that emphasizes code consistency and excellent test coverage.
+Sample demonstrates techniques for using Testspace with Javascript code and the [Mocha test framework](https://mochajs.org/) together with [Istanbul code coverage tool](https://gotwarlost.github.io/istanbul/).
 
-## Features
 
-* [mocha](https://github.com/visionmedia/mocha) test framework.
-* [sinon](http://sinonjs.org) stubbing framework.
-* [istanbul](https://github.com/yahoo/istanbul) test coverage framework.
-* [jshint](http://jshint.com/) code linting.
-* [restify](http://mcavage.github.com/node-restify/) REST framework.
-* choice between make and [jake](https://github.com/mde/jake) build tool.
-* choice of combined or separate servers for each 'app'.
-* servers can run on multiple ports.
+*** 
+Using Multiple Online CI Services:
 
-## Planned
-* Actual model implementation example instead of stubbed model.
 
-## Setup
+***
+Publising **Test Content** using www.testspace.com
 
-Assuming you already have NodeJS 0.8.11 or higher installed:
+***
 
-    git clone https://github.com/BryanDonovan/nodejs-tdd-boilerplate.git
-    cd nodejs-tdd-boilerplate
-    npm install .
-    make
+In order to run this sample you will need a host workstation with installed npm.
 
-Note: to use `jake` you need to install it globally:
+<pre>
+npm install
+make lint test
+</pre>
 
-    npm install -g jake
+Publishing results example: 
 
-You can view available jake tasks with `jake -T`.
+<pre>
+curl -s https://testspace-client.s3.amazonaws.com/testspace-linux.tgz | sudo tar -zxvf- -C /usr/local/bin
+testspace checkstyle.xml [Tests]xunit.xml{test} coverage/cobertura-coverage.xm $TESTSPACE_TOKEN/$BRANCH_NAME
+</pre> 
 
-The `jake` or `make` command will run JSHint, all the mocha unit tests, and check the test coverage.  To view the test coverage report, open coverage/lcov-report/index.html after running `make`.
+Checkout the [Space](http://samples.testspace.com/projects/javascript.mocha). 
 
-You can also run `make test` to just run the tests with coverage, `make test-cov` to run the tests and attempt to open the coverage report in your browser, and `make lint` to run JSHint.
-
-To run the acceptance tests (which are just mocha tests), first start the server:
-
-    bin/start all
-
-Then:
-
-    make test-acceptance
-or:
-
-    jake test:acceptance
-
-You can launch the sever on more than one port via `bin/launch`, for example:
-
-    bin/launch users
-
-.. will launch the users app on two ports (specified in config.js).
-
-Then you can run the acceptance tests against either of those ports by specifying the PORT env variable:
-
-    PORT=12100 make test-acceptance
+***
+To replicate this sample: 
+  - Account at www.testspace.com.
+  - CI Environment Variable called **TESTSPACE_TOKEN** required:
+    -  `TESTSPACE_TOKEN` = `credentials@my-org-name.testspace.com/my-project`
+    - `credentials` set to `username:password` or your [access token](http://help.testspace.com/reference:client-reference#login-credentials).
+    - `my-org-name.testspace.com/my-project` based on your *organization* (subdomain) and *project* names.  

@@ -3,3 +3,6 @@ coverage
 log/*.log
 tmp/*.*
 test/support/tmp/*.js
+
+checkstyle.xml
+xunit.xml
