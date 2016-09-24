@@ -9,9 +9,17 @@ Sample demonstrates techniques for using Testspace with Javascript code and the 
 *** 
 Using Multiple Online CI Services:
 
+[![Build Status](https://travis-ci.org/testspace-samples/javascript.mocha.svg?branch=master)](https://travis-ci.org/testspace-samples/javascript.mocha)
+[![CircleCI](https://circleci.com/gh/testspace-samples/javascript.mocha.svg?style=svg)](https://circleci.com/gh/testspace-samples/javascript.mocha)
+[![Run Status](https://api.shippable.com/projects/57d84135b655251000851a1d/badge?branch=master)](https://app.shippable.com/projects/57d84135b655251000851a1d)
+
 
 ***
 Publising **Test Content** using www.testspace.com
+
+[![Space Health](https://samples.testspace.com/projects/117/spaces/468/badge)](https://samples.testspace.com/projects/117/spaces/468 "Test Cases")
+[![Space Metric](https://samples.testspace.com/projects/117/spaces/468/metrics/341/badge)](https://samples.testspace.com/spaces/468/schema/Code%20Coverage "Code Coverage (lines)")
+[![Space Metric](https://samples.testspace.com/projects/117/spaces/468/metrics/343/badge)](https://samples.testspace.com/spaces/468/schema/Static%20Analysis "Static Analysis (issues)")
 
 ***
 
