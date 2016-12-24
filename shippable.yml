@@ -5,13 +5,18 @@ node_js:
 
 env:
   global:
-   - secure: a9cYRKZdEIwS+F1qiz5RvUAOv/sC4tUtv4gtvkiMlPhAvLpDwN/HY4TvCgvJoFRTEy/tbqJWrT58kxzKiojo5N3Fz9L30V7IWzlT2v9NTBcUp7EJ+3nz3cReH4UNCKZCHJJ+tOLQqermycrDIiQWmLB5YycTvHtZf31QxNGPtg9xGG3UL7F/X+5FrvcDi8zuHQZA5Ndjn4TDiN7RDXcZmKmu8KKbZMaA6tSe3C1i3QBvMoXS5R8nsBTfjkHPOkoYwdV87+5WVghnKSc5wkgFSgzsBMEdWNkyE7O/mN07AM/bNLQZdGh9NEozfT6LYTiLXrV55T6nsHdr92ioLLVcmA==
+  - secure: tSsmixzDVtqCM09eNDK1fJU6j7MSi3WhnDjTR7RI7WZLNpzuVglHnF2ThURPLaFDhFCAcfK+dt/crDI/R6YCa2aVOU9j6qn4zTt6HZHyG2zA89GWgg/h3D+RtAVasoPfP5WE3wvmnGtPyrXQVAk+wEN3ZvnXlD1TAAosZ/OlMQACW8iaZ1zPXVLeC7/KKtghGl/Cg15Y2RrzuiTa5FvPfibU1b8I/s4L5N2JsF666J/IZzT4+QlNv5YMd2FTwTOMLGHLI3Qq+NwYkRaQapdXYk5tIVu3M1hz7dK1IuBLfRUuoaHHDsY7dviH8rOSXYXtouf30dZILAt1IrIz3opFhg==
   
 build:
  ci:
   - npm install
   - make lint test
 
- post_ci:
-  - curl -s https://testspace-client.s3.amazonaws.com/testspace-linux.tgz | sudo tar -zxvf- -C /usr/local/bin
-  - testspace checkstyle.xml [Tests]xunit.xml{test} coverage/cobertura-coverage.xml $TESTSPACE_TOKEN/${BRANCH}#ship.Build.${BUILD_NUMBER}
+  # Requires TESTSPACE_TOKEN environment variable. 
+ on_success:
+   - curl -s https://testspace-client.s3.amazonaws.com/testspace-linux.tgz | sudo tar -zxvf- -C /usr/local/bin
+   - testspace @.testspace.txt $TESTSPACE_TOKEN/${SHIPPABLE_REPO_SLUG/\//:}/${BRANCH}#ship.Build.${BUILD_NUMBER}
+
+ on_failure:
+   - curl -s https://testspace-client.s3.amazonaws.com/testspace-linux.tgz | sudo tar -zxvf- -C /usr/local/bin
+   - testspace @.testspace.txt $TESTSPACE_TOKEN/${SHIPPABLE_REPO_SLUG/\//:}/${BRANCH}#ship.Build.${BUILD_NUMBER}

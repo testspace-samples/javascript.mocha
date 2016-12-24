@@ -1,4 +1,5 @@
-[![Testspace](http://www.testspace.com/public/img/testspace_logo.png)](http://www.testspace.com)
+[![Testspace](http://www.testspace.com/img/Testspace.png)](http://www.testspace.com)
+
 ***
 
 ## JavaScript/Mocha sample for demonstrating Testspace based on the [nodejs-tdd-boilerplate](https://github.com/BryanDonovan/nodejs-tdd-boilerplate)
@@ -17,10 +18,10 @@ Using Multiple Online CI Services:
 ***
 Publising **Test Content** using www.testspace.com
 
-[![Space Health](https://samples.testspace.com/projects/117/spaces/468/badge)](https://samples.testspace.com/projects/117/spaces/468 "Test Cases")
-[![Space Metric](https://samples.testspace.com/projects/117/spaces/468/metrics/340/badge)](https://samples.testspace.com/spaces/468/schema/Code%20Coverage "Code Coverage (branches)")
-[![Space Metric](https://samples.testspace.com/projects/117/spaces/468/metrics/342/badge)](https://samples.testspace.com/spaces/468/schema/Code%20Coverage "Code Coverage (methods)")
-[![Space Metric](https://samples.testspace.com/projects/117/spaces/468/metrics/343/badge)](https://samples.testspace.com/spaces/468/schema/Static%20Analysis "Static Analysis (issues)")
+[![Space Health](https://samples.testspace.com/projects/164/spaces/799/badge)](https://samples.testspace.com/projects/164/spaces/799 "Test Cases")
+[![Space Metric](https://samples.testspace.com/projects/164/spaces/799/metrics/743/badge)](https://samples.testspace.com/spaces/799/schema/Code%20Coverage "Code Coverage (branches)")
+[![Space Metric](https://samples.testspace.com/projects/164/spaces/799/metrics/745/badge)](https://samples.testspace.com/spaces/799/schema/Code%20Coverage "Code Coverage (methods)")
+[![Space Metric](https://samples.testspace.com/projects/164/spaces/799/metrics/746/badge)](https://samples.testspace.com/spaces/799/schema/Static%20Analysis "Static Analysis (issues)")
 
 ***
 
@@ -31,19 +32,19 @@ npm install
 make lint test
 </pre>
 
-Publishing results example: 
-
 <pre>
 curl -s https://testspace-client.s3.amazonaws.com/testspace-linux.tgz | sudo tar -zxvf- -C /usr/local/bin
-testspace checkstyle.xml [Tests]xunit.xml{test} coverage/cobertura-coverage.xm $TESTSPACE_TOKEN/$BRANCH_NAME
+testspace @.testspace.txt $TESTSPACE_TOKEN/$GITHUB_ORG:$REPO_NAME/$BRANCH_NAME#$BUILD_NUMBER
 </pre> 
 
-Checkout the [Space](http://samples.testspace.com/projects/javascript.mocha). 
+Checkout the published [Test Content](https://samples.testspace.com/projects/testspace-samples:javascript.mocha). Note that the `.testspace.txt` file contains the [set of files](http://help.testspace.com/how-to:publish-content#publishing-via-content-list-file) to publish. 
 
 ***
+
 To replicate this sample: 
-  - Account at www.testspace.com.
-  - CI Environment Variable called **TESTSPACE_TOKEN** required:
-    -  `TESTSPACE_TOKEN` = `credentials@my-org-name.testspace.com/my-project`
-    - `credentials` set to `username:password` or your [access token](http://help.testspace.com/reference:client-reference#login-credentials).
-    - `my-org-name.testspace.com/my-project` based on your *organization* (subdomain) and *project* names.  
+  - Setup account at www.testspace.com.
+  - Create a Environment variable called `TESTSPACE_TOKEN`
+     - `TESTSPACE_TOKEN` = `credentials@Your-Org-Name.testspace.com`
+     - `credentials` set to `username:password` or your [access token](http://help.testspace.com/reference:client-reference#login-credentials)
+     - To [use Testspace with a CI system](http://help.testspace.com/how-to:add-to-ci-workflow), store `TESTSPACE_TOKEN` as a secure environment variable
+ 

@@ -1,0 +1,3 @@
+checkstyle.xml 
+[Tests]xunit.xml{test} 
+coverage/cobertura-coverage.xml
