@@ -2,21 +2,18 @@ language: node_js
 
 node_js:
   - "4.0"
-
-env:
-  global:
-  - secure: tSsmixzDVtqCM09eNDK1fJU6j7MSi3WhnDjTR7RI7WZLNpzuVglHnF2ThURPLaFDhFCAcfK+dt/crDI/R6YCa2aVOU9j6qn4zTt6HZHyG2zA89GWgg/h3D+RtAVasoPfP5WE3wvmnGtPyrXQVAk+wEN3ZvnXlD1TAAosZ/OlMQACW8iaZ1zPXVLeC7/KKtghGl/Cg15Y2RrzuiTa5FvPfibU1b8I/s4L5N2JsF666J/IZzT4+QlNv5YMd2FTwTOMLGHLI3Qq+NwYkRaQapdXYk5tIVu3M1hz7dK1IuBLfRUuoaHHDsY7dviH8rOSXYXtouf30dZILAt1IrIz3opFhg==
-  
+ 
 build:
  ci:
+  - mkdir -p $HOME/bin
+  - curl -fsSL https://testspace-client.s3.amazonaws.com/testspace-linux.tgz | tar -zxvf- -C $HOME/bin
+  - testspace config url samples.testspace.com
+  - testspace -v
   - npm install
   - make lint test
 
-  # Requires TESTSPACE_TOKEN environment variable. 
  on_success:
-   - curl -s https://testspace-client.s3.amazonaws.com/testspace-linux.tgz | sudo tar -zxvf- -C /usr/local/bin
-   - testspace @.testspace.txt $TESTSPACE_TOKEN/${SHIPPABLE_REPO_SLUG/\//:}/${BRANCH}#ship.Build.${BUILD_NUMBER}
-
+  - testspace checkstyle.xml [Tests]xunit.xml{test} coverage/cobertura-coverage.xml
+ 
  on_failure:
-   - curl -s https://testspace-client.s3.amazonaws.com/testspace-linux.tgz | sudo tar -zxvf- -C /usr/local/bin
-   - testspace @.testspace.txt $TESTSPACE_TOKEN/${SHIPPABLE_REPO_SLUG/\//:}/${BRANCH}#ship.Build.${BUILD_NUMBER}
+  - testspace checkstyle.xml [Tests]xunit.xml{test} coverage/cobertura-coverage.xml

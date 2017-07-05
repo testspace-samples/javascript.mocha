@@ -3,6 +3,10 @@ node_js:
   - "4.0"
   
 before_script:
+  - mkdir -p $HOME/bin
+  - curl -fsSL https://testspace-client.s3.amazonaws.com/testspace-linux.tgz | tar -zxvf- -C $HOME/bin
+  - testspace config url samples.testspace.com
+  - testspace -v
   - npm install
   
 script: 
@@ -10,6 +14,4 @@ script:
   
 # Requires TESTSPACE_TOKEN environment variable.   
 after_script:
-  - curl -s https://testspace-client.s3.amazonaws.com/testspace-linux.tgz | sudo tar -zxvf- -C /usr/local/bin
-  - testspace @.testspace.txt $TESTSPACE_TOKEN/${TRAVIS_REPO_SLUG/\//:}/${TRAVIS_BRANCH}#travis.Build.${TRAVIS_BUILD_NUMBER}
- 
+  - testspace checkstyle.xml [Tests]xunit.xml{test} coverage/cobertura-coverage.xml
