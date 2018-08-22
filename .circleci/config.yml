@@ -1,0 +1,16 @@
+version: 2.0
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:6-browsers
+    steps:
+      - checkout
+      - run: "curl -fsSL https://testspace-client.s3.amazonaws.com/testspace-linux.tgz | sudo tar -zxvf- -C /usr/local/bin"
+      - run: "testspace config url samples.testspace.com"
+      - run: npm install
+      - run: make lint test
+      - run:
+          name: Send reports to testspace
+          command: testspace checkstyle.xml [Tests]xunit.xml{test} coverage/cobertura-coverage.xml
+          when: always
