@@ -12,8 +12,5 @@ build:
   - npm install
   - make lint test
 
- on_success:
-  - testspace checkstyle.xml [Tests]xunit.xml{test} coverage/cobertura-coverage.xml
- 
- on_failure:
+ always:
   - testspace checkstyle.xml [Tests]xunit.xml{test} coverage/cobertura-coverage.xml
