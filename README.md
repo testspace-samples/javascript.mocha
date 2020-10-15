@@ -7,15 +7,15 @@
 Sample demonstrates techniques for using Testspace with Javascript code and the [Mocha test framework](https://mochajs.org/) together with [Istanbul code coverage tool](https://gotwarlost.github.io/istanbul/).
   * Using a Testspace Project that is `connected` with this GitHub Repo
   * Using 3 Online CI services for demonstration purposes only
-  * Can review the Results at [testspace-samples:javascript.mocha](https://samples.testspace.com/projects/testspace-samples:javascript.mocha)  
-  * Refer to our [Getting Started](https://help.testspace.com/getting-started) help articles for more information
+  * Can review the Results at [testspace-samples:javascript.mocha](https://samples.testspace.com/projects/testspace-samples:javascript.mocha)
+  * Refer to our [Help](https://help.testspace.com/) for more information
 
-*** 
+***
 Using Multiple Online CI Services:
 
+![Build](https://github.com/testspace-samples/javascript.mocha/workflows/Build/badge.svg)
 [![Build Status](https://travis-ci.org/testspace-samples/javascript.mocha.svg?branch=master)](https://travis-ci.org/testspace-samples/javascript.mocha)
 [![CircleCI](https://circleci.com/gh/testspace-samples/javascript.mocha.svg?style=svg)](https://circleci.com/gh/testspace-samples/javascript.mocha)
-[![Run Status](https://api.shippable.com/projects/57d84135b655251000851a1d/badge?branch=master)](https://app.shippable.com/projects/57d84135b655251000851a1d)
 
 
 ***
@@ -27,7 +27,7 @@ Publising **Test Content** using www.testspace.com
 
 ***
 
-Download and configure the Testspace client 
+Download and configure the Testspace client
 
 <pre>
 mkdir -p $HOME/bin
@@ -43,8 +43,8 @@ npm install
 make lint test
 </pre>
 
-Push Content using Testspace client 
+Push Content using Testspace client
 
 <pre>
 testspace checkstyle.xml [Tests]xunit.xml{test} coverage/cobertura-coverage.xml
-</pre> 
+</pre>
